@@ -11,7 +11,10 @@ import java.util.List;
 import io.reactivex.Scheduler;
 import io.reactivex.subjects.PublishSubject;
 import ru.geekbrains.gb_android_libraries.mvp.model.entity.Repository;
+import ru.geekbrains.gb_android_libraries.mvp.model.repo.PaperUsersRepo;
 import ru.geekbrains.gb_android_libraries.mvp.model.repo.RealmUsersRepo;
+import ru.geekbrains.gb_android_libraries.mvp.model.repo.RoomUsersRepo;
+import ru.geekbrains.gb_android_libraries.mvp.model.repo.UsersRepo;
 import ru.geekbrains.gb_android_libraries.mvp.presenter.list.IRepositoryListPresenter;
 import ru.geekbrains.gb_android_libraries.mvp.view.MainView;
 import ru.geekbrains.gb_android_libraries.mvp.view.list.ReposotoryItemView;
@@ -40,12 +43,16 @@ public class MainPresenter extends MvpPresenter<MainView> {
         }
     }
 
-    private RealmUsersRepo usersRepo;
+//    private RealmUsersRepo usersRepo;
+    private UsersRepo usersRepo;
     private Scheduler mainThreadScheduler;
     private RepositoryListPresenter repositoryListPresenter;
 
     public MainPresenter(Scheduler mainThreadScheduler) {
-        this.usersRepo = new RealmUsersRepo();
+       // this.usersRepo = new RealmUsersRepo();
+    //    this.usersRepo = new UsersRepo(new RealmUsersRepo());
+    //    this.usersRepo = new UsersRepo(new RoomUsersRepo());
+        this.usersRepo = new UsersRepo(new PaperUsersRepo());
         this.mainThreadScheduler = mainThreadScheduler;
         repositoryListPresenter = new RepositoryListPresenter();
     }
